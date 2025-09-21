@@ -1,5 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>CS4241 Assignment 3 Data Page</title>
+    <meta charset="utf-8">
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">\
+    <link rel="stylesheet" href ="css/styles.css">
+</head>
+
 <body>
-    <p>
-        Hi
-    </p>
+    <h1>
+        Data
+    </h1>
+
+    <table id = "tableInsert" class = "pure-table">
+    </table>
+
+    <h2>Add Info To Your Account</h2>
+    <form id = "add">
+        <label for="field">Field</label> <br>
+        <input type = "text" name = "field"> <br><br>
+        <label for="value">Value</label> <br>
+        <input type = "text" name = "toAdd"> <br><br>
+        <input type = "submit" value = "submit"> <br>
+    </form>
+    <br>
+    <h2>Update Info To Your Account</h2>
+    <form id = "update">
+        <label for="field">Field</label> <br>
+        <input type = "text" name = "field"> <br><br>
+        <label for="value">Value</label> <br>
+        <input type = "text" name = "toUpdate"> <br><br>
+        <input type = "submit" value = "submit"> <br>
+    </form>
+    <br>
+    <h2>Remove Info From Your Account</h2>
+    <form id = "remove">
+        <label for="field">Field</label> <br>
+        <input type = "text" name = "field"> <br><br>
+        <input type = "submit" value = "submit"> <br>
+    </form>
 </body>

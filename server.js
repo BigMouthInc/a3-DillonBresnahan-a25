@@ -3,8 +3,11 @@ const express = require( 'express' ),
       app = express(),
     { engine } = require('express-handlebars'),
     path = require('path'),
-    dreams = []
+    hbs = require('express-handlebars').engine
     require('dotenv').config();   // loads .env into process.env
+
+let username = ""
+let password = ""
 
 
 app.use( express.static( 'public' ) )
@@ -12,6 +15,10 @@ app.use( express.static( 'views'  ) )
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })); 
+
+app.engine('engine', hbs())
+app.set('view engine', 'handlebars')
+app.set('views', '/views')
 
 app.post( '/submit', (req, res) => {
       dreams.push( req.body.newdream )
@@ -46,16 +53,26 @@ async function run() {
 }
 
 app.post('/login', async(req, res) => {
-  console.log(req.body.username)
   const user = await collection.findOne({username : req.body.username})
-  console.log(user)
   if (user){
     console.log("Username exists")
+    const userAndPass = await collection.findOne({
+        username : req.body.username,
+        password : req.body.password  
+    })
+    if (userAndPass){
+      res.redirect("main.html")
+      username = req.body.username
+      password = req.body.password 
+    }
+    else 
+      res.render("login", {msg: "Wrong password, please try again", layout : false})
   }
   else {
-    console.log("Doesn't exists")
+    const document = {username : req.body.username, password : req.body.password}
+    await collection.insertOne(document)
+    res.render("login", {msg: "Account has been created, please login in again to access your account.", layout : false})
   }
-
 });
 
 
@@ -64,6 +81,20 @@ app.get("/docs", async (req, res) => {
         const docs = await collection.find({}).toArray()
         res.json( docs )
     }
+})
+
+app.get("/table", async (req, res)=> {
+  const data = await collection.findOne({
+    username : username,
+    password : password 
+  })
+  res.end(JSON.stringify(data));
+})
+
+app.get('/fields', async (req, res) =>{
+ const doc = await collection.findOne({username : username})
+  const fields = Object.keys(doc)
+  res.end(JSON.stringify(fields));
 })
 
 // Handlebars setup
@@ -85,27 +116,50 @@ app.use( (req,res,next) => {
 })
 
 app.post( '/add', async (req,res) => {
-    const result = await collection.insertOne( req.body )
+    console.log(req.body)
+    const field = req.body.field
+    const toAdd = req.body.toAdd
+    const result = await collection.updateOne( {username : username},
+                                                {$set: {[field] : toAdd}}
+     );
     res.json( result )
 })
 
-// assumes req.body takes form { _id:5d91fb30f3f81b282d7be0dd } etc.
 app.post( '/remove', async (req,res) => {
-    const result = await collection.deleteOne({ 
-        _id:new ObjectId( req.body._id ) 
-    })
-  
-    res.json( result )
+    console.log(req.body)
+    const field = req.body.field
+    const doc = await collection.findOne({username : username})
+    const allFields = Object.keys(doc)
+    if (!allFields.includes(field)){
+      res.status(400).json({success : false})
+      return;
+    }
+    else{
+    const result = await collection.updateOne( {username : username},
+                                                {$unset: {[field] : ""}}
+     );
+    res.status(200).json({success : true})
+    }
 })
 
 app.post( '/update', async (req,res) => {
-    const result = await collection.updateOne(
-        { _id: new ObjectId( req.body._id ) },
-        { $set:{ name:req.body.name } }
-    )
-
-    res.json( result )
+    console.log(req.body)
+    const field = req.body.field
+    const toUpdate = req.body.toUpdate
+    const doc = await collection.findOne({username : username})
+    const allFields = Object.keys(doc)
+    if (!allFields.includes(field)){
+      res.status(400).json({success : false})
+      return;
+    }
+    else{
+    const result = await collection.updateOne( {username : username},
+                                                {$set: {[field] : toUpdate}}
+     );
+    res.status(200).json({success : true})
+    }
 })
+
 
 run().catch(console.dir);
 

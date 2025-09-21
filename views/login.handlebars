@@ -1,21 +1,26 @@
 <!doctype html>
 <html lang="en">
+<meta name = "viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Login page for CS 4241 A3">
 <head>
-    <title>CS4241 Assignment 2</title>
+    <title>CS4241 Assignment 3</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href ="css/styles.css">
 </head>
 
 <body>
     <h1>
         Please Login In
     </h1>
-    <form action='/login' method='POST'>
+    <form action='/login' method='POST' class = "pure-form">
         <label for="username">Username</label> <br>
-        <input type = "text" name = "username"> <br><br>
+        <input type = "text" name = "username" id = "username"> <br><br>
         <label for="password">Password</label> <br>
-        <input type = "password" name = "password"> <br><br>
+        <input type = "password" name = "password" id = "password"> <br><br>
         <input type = "submit" value = "submit"> <br>
     </form>
-
+<p id = "message">
     {{{msg}}}
+</p>
 </body>

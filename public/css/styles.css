@@ -1,0 +1,23 @@
+body {
+    background-color: aquamarine;
+}
+
+form {
+    text-align: center;
+    margin: 0 auto;
+    width: 250px;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+#message{
+    text-align: center;
+}
+
+table{
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
