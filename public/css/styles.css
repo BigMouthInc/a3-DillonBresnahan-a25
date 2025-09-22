@@ -21,3 +21,34 @@ table{
     margin-left: auto;
     margin-right: auto;
 }
+
+#addForm{
+    background-color: azure;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+}
+
+#updateForm{
+    background-color: yellow;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+}
+
+#removeForm {
+    background-color: darkseagreen;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+
+}
+
+#allForms{
+     max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: flex-start;
+    
+}

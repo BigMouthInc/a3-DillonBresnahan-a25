@@ -34,10 +34,20 @@ async function formTable(){
     element.innerHTML = tableData;
     
 }
+/*
+async function formDelete() {
+    const getFields = await fetch('/fields', {
+        method: 'GET'
+    })
+
+    let element = document.getElementById(remove)
+    
+}*/
 
 
 window.onload = function(){
     formTable();
+    //formDelete();
     const addForm = document.getElementById("add")
     addForm.addEventListener("submit", async function(event) {
         event.preventDefault()  

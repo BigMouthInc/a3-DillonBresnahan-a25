@@ -1,10 +1,10 @@
 {
-  "name": "agepetdatabase",
+  "name": "favoritesdatabase",
   "version": "1.0.0",
   "description": "",
   "author": "",
   "scripts": {
-    "start": "node server.improved.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "cookie-session": "^2.1.1",
