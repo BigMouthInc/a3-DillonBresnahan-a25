@@ -10,14 +10,13 @@ let password = ""
 
 
 app.use( express.static( 'public' ) )
-app.use( express.static( 'views'  ) )
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })); 
 
-app.engine('engine', hbs())
+app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
-app.set('views', '/views')
+app.set('views', path.join(__dirname, 'views'))
 
 app.post( '/submit', (req, res) => {
       dreams.push( req.body.newdream )
@@ -94,11 +93,6 @@ app.get('/fields', async (req, res) =>{
   const fields = Object.keys(doc)
   res.end(JSON.stringify(fields));
 })
-
-// Handlebars setup
-app.engine('handlebars', engine())
-app.set('view engine', 'handlebars')
-app.set('views', path.join(__dirname, 'views'))
 
 // GET / → login page
 app.get('/', (req, res) => {
