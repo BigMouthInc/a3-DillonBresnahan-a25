@@ -54,13 +54,12 @@ async function run() {
 app.post('/login', async(req, res) => {
   const user = await collection.findOne({username : req.body.username})
   if (user){
-    console.log("Username exists")
     const userAndPass = await collection.findOne({
         username : req.body.username,
         password : req.body.password  
     })
     if (userAndPass){
-      res.redirect("main.html")
+      res.redirect("/main.html")
       username = req.body.username
       password = req.body.password 
     }
@@ -114,8 +113,7 @@ app.use( (req,res,next) => {
     }
 })
 
-app.post( '/add', async (req,res) => {
-    console.log(req.body)
+app.post( '/add', async (req,res) => { 
     const field = req.body.field
     const toAdd = req.body.toAdd
     const result = await collection.updateOne( {username : username},
@@ -125,7 +123,6 @@ app.post( '/add', async (req,res) => {
 })
 
 app.post( '/remove', async (req,res) => {
-    console.log(req.body)
     const field = req.body.field
     const doc = await collection.findOne({username : username})
     const allFields = Object.keys(doc)
@@ -142,7 +139,6 @@ app.post( '/remove', async (req,res) => {
 })
 
 app.post( '/update', async (req,res) => {
-    console.log(req.body)
     const field = req.body.field
     const toUpdate = req.body.toUpdate
     const doc = await collection.findOne({username : username})
