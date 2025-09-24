@@ -3,7 +3,7 @@ const express = require( 'express' ),
     { engine } = require('express-handlebars'),
     path = require('path'),
     hbs = require('express-handlebars').engine
-    require('dotenv').config();   // loads .env into process.env
+    require('dotenv').config();   
 
 let username = ""
 let password = ""
@@ -20,6 +20,8 @@ app.set('views', path.join(__dirname, 'views'))
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USERNM}:${process.env.PASS}@${process.env.HOST}/?retryWrites=true&w=majority&appName=WebwareA3`;
+
+console.log(uri);
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
