@@ -1,5 +1,4 @@
 const express = require( 'express' ),
-      cookie  = require( 'cookie-session' ),
       app = express(),
     { engine } = require('express-handlebars'),
     path = require('path'),

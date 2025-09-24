@@ -47,7 +47,6 @@ async function formDelete() {
 
 window.onload = function(){
     formTable();
-    //formDelete();
     const addForm = document.getElementById("add")
     addForm.addEventListener("submit", async function(event) {
         event.preventDefault()  
@@ -64,6 +63,7 @@ window.onload = function(){
         })
 
         formTable();
+        addForm.reset();
 
     });
     
@@ -89,6 +89,7 @@ window.onload = function(){
         }
 
         formTable();
+        updateForm.reset();
 
     });
 
@@ -113,7 +114,7 @@ window.onload = function(){
         }
 
         formTable();
-
+        deleteForm.reset();
     });
 
 
