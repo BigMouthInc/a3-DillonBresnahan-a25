@@ -18,12 +18,6 @@ app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'views'))
 
-app.post( '/submit', (req, res) => {
-      dreams.push( req.body.newdream )
-      res.writeHead( 200, { 'Content-Type': 'application/json' })
-      res.end( JSON.stringify( dreams ) )
-})
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USERNM}:${process.env.PASS}@${process.env.HOST}/?retryWrites=true&w=majority&appName=WebwareA3`;
 
@@ -49,6 +43,14 @@ async function run() {
   console.log("error : ", err)
  }
 }
+
+app.use( (req,res,next) => {
+    if( collection !== null ) {
+        next()
+    } else {
+        res.status( 503 ).send()
+    }
+})
 
 app.post('/login', async(req, res) => {
   const user = await collection.findOne({username : req.body.username})
@@ -99,13 +101,6 @@ app.get('/', (req, res) => {
   res.render('login', { msg: null, layout: false })
 })
 
-app.use( (req,res,next) => {
-    if( collection !== null ) {
-        next()
-    } else {
-        res.status( 503 ).send()
-    }
-})
 
 app.post( '/add', async (req,res) => { 
     const field = req.body.field
@@ -149,7 +144,9 @@ app.post( '/update', async (req,res) => {
     }
 })
 
+async function startServer() {
+  await run();
+  app.listen(process.env.PORT || 3000, () => console.log("Server running"));
+}
 
-run().catch(console.dir);
-
-app.listen( process.env.PORT || 3000)	
+startServer().catch(console.dir);
