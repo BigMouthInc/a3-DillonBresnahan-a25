@@ -1,6 +1,6 @@
 ## Favorites Database
 
-Your Render (or alternative server) link e.g. http://a3-joshua-cuneo.render.me
+(https://a3-dillonbresnahan-a25-production.up.railway.app/)
 
 Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
 
@@ -9,7 +9,7 @@ In this website, users can keep track of what their favorite things are, and eas
 
 ## Technical Achievements
 - **Tech Achievement 1**: I achieved 100 on all Ligthouse tests*
-- **Tech Achievement 2**: I hosted my site on 
+- **Tech Achievement 2**: I hosted my site on Railway
 - **Tech Achievement 3**: I used Handlebars to show messages for the login page
 
 ### Design/Evaluation Achievements
@@ -28,6 +28,6 @@ In this website, users can keep track of what their favorite things are, and eas
 12. Ensure that all interactive elements are keyboard accessible
 
 AI Usage:
-I used ChatGPT for minor bug fixes, such as typos in my code and helping me identify incorrect JSON usage.
+I used ChatGPT for minor bug fixes, such as typos in my code, helping me identify incorrect JSON usage, and issues with Railway.
 
 *For the Lighthouse, I keep getting an error that says I do not have the HTML lang element on my pages when I do. I do not what is causing this bug. Earlier in the process, I had gotten 100 on Lighthouse and it suddenly changed. On the Web Dev tips, the lang attribute is visable.
