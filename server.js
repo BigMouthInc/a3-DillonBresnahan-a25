@@ -44,14 +44,6 @@ async function run() {
  }
 }
 
-app.use( (req,res,next) => {
-    if( collection !== null ) {
-        next()
-    } else {
-        res.status( 503 ).send()
-    }
-})
-
 app.post('/login', async(req, res) => {
   const user = await collection.findOne({username : req.body.username})
   if (user){
