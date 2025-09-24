@@ -21,7 +21,6 @@ app.set('views', path.join(__dirname, 'views'))
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USERNM}:${process.env.PASS}@${process.env.HOST}/?retryWrites=true&w=majority&appName=WebwareA3`;
 
-console.log(uri);
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -139,6 +138,7 @@ app.post( '/update', async (req,res) => {
 })
 
 async function startServer() {
+  console.log(uri);
   await run();
   app.listen(process.env.PORT || 3000, () => console.log("Server running"));
 }
