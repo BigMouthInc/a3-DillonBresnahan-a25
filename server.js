@@ -1,8 +1,7 @@
 const express = require( 'express' ),
       app = express(),
     { engine } = require('express-handlebars'),
-    path = require('path'),
-    hbs = require('express-handlebars').engine
+    path = require('path')
     require('dotenv').config();   
 
 let username = ""
